@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>Lap timer</title>
+    <script src="jquery.js"></script>
+
+    <style>
+      table, th, td {
+        border: 1px solid black;
+      }
+
+      td, th {
+        width: 100px;
+        text-align: center
+      }
+    </style>
+
+  </head>
+  <body onclick="lap()">
+    <!-- <button id="startButton" onclick="startTimer()">Start</button> -->
+    <!-- <button onclick="lap()">Lap</button> -->
+    <h1>Laps</h1>
+    <table id="lapTimesTable">
+      <th>Lap</th>
+      <th>Lap time</th>
+      <th>Total</th>
+    </table>
+
+    <script>
+      let times = []
+
+      window.onkeypress = function(event) {
+         if (event.keyCode == 32) {
+            lap()
+         }
+      }
+
+      function startTimer() {
+        times.push(Date.now())
+        $("#startButton").remove()
+      }
+
+      function lap() {
+        times.push(Date.now())
+
+        lapTime = (times[times.length - 1] - times[times.length - 2]) / 1000
+        totalTime = (times[times.length - 1] - times[0]) / 1000
+
+        $("#lapTimesTable").append($("<tr>")
+          .append([
+            $("<td>").text(times.length - 1),
+            $("<td>").text(secondsToTimestamp(lapTime)),
+            $("<td>").text(secondsToTimestamp(totalTime)),
+          ])  
+        )
+      }
+
+      function secondsToTimestamp(totalSeconds) {
+        minutes = Math.floor(totalSeconds / 60).toFixed(0)
+        seconds = totalSeconds % 60
+        millies = ((seconds % 1) * 1000).toFixed(0)
+        return minutes.padStart(2, "0") + ":" + seconds.toFixed(0).padStart(2, "0") + "." + millies.padEnd(3, "0")
+      }
+
+    </script>
+  </body>
+</html>
