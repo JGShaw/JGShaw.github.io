@@ -15,14 +15,17 @@
     </style>
 
   </head>
-  <body onclick="lap()">
-    <!-- <button id="startButton" onclick="startTimer()">Start</button> -->
-    <!-- <button onclick="lap()">Lap</button> -->
+  <body>
+
+    <label for="fname">Total Laps:</label>
+    <input type="number" id="totalLaps" name="totalLaps" value="12"><br>
+
     <h1>Laps</h1>
-    <table id="lapTimesTable">
+    <table onclick=lap() id="lapTimesTable">
       <th>Lap</th>
       <th>Lap time</th>
       <th>Total</th>
+      <th>Expected finish from previous lap</th>
     </table>
 
     <script>
@@ -36,29 +39,41 @@
 
       function startTimer() {
         times.push(Date.now())
-        $("#startButton").remove()
       }
 
       function lap() {
         times.push(Date.now())
 
-        lapTime = (times[times.length - 1] - times[times.length - 2]) / 1000
-        totalTime = (times[times.length - 1] - times[0]) / 1000
+        lapTime = (times[times.length - 1] - times[times.length - 2])
+        totalTime = (times[times.length - 1] - times[0])
 
         $("#lapTimesTable").append($("<tr>")
           .append([
             $("<td>").text(times.length - 1),
-            $("<td>").text(secondsToTimestamp(lapTime)),
-            $("<td>").text(secondsToTimestamp(totalTime)),
+            $("<td>").text(msToTime(lapTime)),
+            $("<td>").text(msToTime(totalTime)),
+            $("<td>").text(msToTime(totalTime + estimateRemainingTime(lapTime))),
           ])  
         )
       }
 
-      function secondsToTimestamp(totalSeconds) {
-        minutes = Math.floor(totalSeconds / 60).toFixed(0)
-        seconds = totalSeconds % 60
-        millies = ((seconds % 1) * 1000).toFixed(0)
-        return minutes.padStart(2, "0") + ":" + seconds.toFixed(0).padStart(2, "0") + "." + millies.padEnd(3, "0")
+      function estimateRemainingTime(lastLap) {
+        lapsLeft = $("#totalLaps").val() - times.length + 1
+        console.log("last lap: ", lastLap) 
+        console.log("Laps left: ", lapsLeft)
+        return lapsLeft * lastLap
+      }
+
+      <!-- https://stackoverflow.com/questions/19700283/how-to-convert-time-in-milliseconds-to-hours-min-sec-format-in-javascript -->
+      function msToTime(duration) {
+        var milliseconds = Math.floor(duration % 1000),
+          seconds = Math.floor((duration / 1000) % 60),
+          minutes = Math.floor((duration / (1000 * 60)) % 60),
+
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return minutes + ":" + seconds + "." + milliseconds.toString().padStart(3, "0");
       }
 
     </script>
