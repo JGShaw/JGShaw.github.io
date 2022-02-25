@@ -1,8 +1,6 @@
 <html>
   <head>
     <title>Lap timer</title>
-    <script src="jquery.js"></script>
-
     <style>
       table, th, td {
         border: 1px solid black;
@@ -44,7 +42,7 @@
 
 
       function start() {
-        lapTarget = $("#lapTarget").val() * 1000
+        lapTarget = document.getElementById("lapTarget").value * 1000
         document.getElementById("lapTimesTable").removeAttribute("onclick");
         document.body.onclick = lap
       }
@@ -57,14 +55,11 @@
 
         setBackground(lapTime)
 
-        $("#lapTimesTable").append($("<tr>")
-          .append([
-            $("<td>").text(times.length - 1),
-            $("<td>").text(msToTime(lapTime)),
-            $("<td>").text(msToTime(totalTime)),
-            $("<td>").text(msToTime(totalTime + estimateRemainingTime(lapTime))),
-          ])  
-        )
+        row = document.getElementById("lapTimesTable").insertRow(-1)
+        row.insertCell(-1).innerHTML = times.length - 1
+        row.insertCell(-1).innerHTML = msToTime(lapTime)
+        row.insertCell(-1).innerHTML = msToTime(totalTime)
+        row.insertCell(-1).innerHTML = msToTime(totalTime + estimateRemainingTime(lapTime))
       }
 
       function setBackground(lapTime) {
@@ -78,7 +73,7 @@
       }
 
       function estimateRemainingTime(lastLap) {
-        lapsLeft = $("#totalLaps").val() - times.length + 1
+        lapsLeft = document.getElementById("") - times.length + 1
         return lapsLeft * lastLap
       }
 
