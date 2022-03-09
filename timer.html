@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Lap timer</title>
+    <style>
+      table, th, td {
+        border: 1px solid black;
+      }
+
+      td, th {
+        width: 100px;
+        text-align: center
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <h1>Laps</h1>
+    <table onclick=start() id="lapTimesTable">
+      <th>Lap</th>
+      <th>Lap time</th>
+      <th>Total</th>
+      <th>Expected finish from previous lap</th>
+    </table>
+
+    <script>
+      let times = []
+
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const targetFirst =  Number(urlParams.get("targetFirst") * 1000)
+      const targetFinishMs =  Number(urlParams.get("targetMinutes") * 60 * 1000) + Number(urlParams.get("targetSeconds") * 1000) + Number(urlParams.get("targetMillies"))
+      const lapTarget = Number(urlParams.get("totalLaps"))
+
+      var red = {color: "red", from: 1000, to: Infinity};
+      var orange = {color: "orange", from: 0, to: 999};
+      var green = {color: "green", from: -1000, to: -1};
+      var blue = {color: "blue", from: -Infinity, to: -1001};
+      var thresholds = [blue, green, orange, red]
+
+
+      function start() {
+        document.getElementById("lapTimesTable").removeAttribute("onclick");
+        document.body.onclick = lap
+      }
+
+      function lap() {
+        times.push(Date.now())
+
+        lapNumber = times.length - 1
+        lapTime = (times[lapNumber] - times[lapNumber - 1])
+        totalTime = (times[lapNumber] - times[0])
+        estimatedFinishTime = totalTime + estimateRemainingTime(lapTime)
+
+        setBackground(lapNumber, lapTime, estimatedFinishTime)
+
+        row = document.getElementById("lapTimesTable").insertRow(-1)
+        row.insertCell(-1).innerHTML = times.length - 1
+        row.insertCell(-1).innerHTML = msToTime(lapTime)
+        row.insertCell(-1).innerHTML = msToTime(totalTime)
+        row.insertCell(-1).innerHTML = msToTime(estimatedFinishTime)
+      }
+
+      function setBackground(lapNumber, lapTime, estimatedFinishTime) {
+        diff = 0
+        if(lapNumber === 1) {
+          diff = lapTime - targetFirst 
+        } else {
+          diff = estimatedFinishTime - targetFinishMs 
+        }
+
+        for (const t of thresholds) {
+          if(diff >= t.from && diff <= t.to) {
+            document.body.bgColor = t.color
+            return
+          }
+        }
+      }
+
+      function estimateRemainingTime(lastLap) {
+        lapsLeft = lapTarget - times.length + 1
+        return lapsLeft * lastLap
+      }
+
+      <!-- https://stackoverflow.com/questions/19700283/how-to-convert-time-in-milliseconds-to-hours-min-sec-format-in-javascript -->
+      function msToTime(duration) {
+        var milliseconds = Math.floor(duration % 1000),
+          seconds = Math.floor((duration / 1000) % 60),
+          minutes = Math.floor((duration / (1000 * 60)) % 60),
+
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return minutes + ":" + seconds + "." + milliseconds.toString().padStart(3, "0");
+      }
+
+    </script>
+  </body>
+</html>
