@@ -1,0 +1,12 @@
+body {
+  overscroll-behavior-y: contain;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+td, th {
+  width: 100px;
+  text-align: center
+}

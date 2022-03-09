@@ -1,27 +1,15 @@
 <html>
   <head>
+    <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.webmanifest">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#fff">
-
     <title>Lap timer</title>
-    <style>
-      table, th, td {
-        border: 1px solid black;
-      }
-
-      td, th {
-        width: 100px;
-        text-align: center
-      }
-    </style>
-
+    <meta name="theme-color" content="#fff">
   </head>
-  <body>
+  <body onclick="lap()">
 
     <h1>Laps</h1>
-    <table onclick=start() id="lapTimesTable">
+    <table id="lapTimesTable">
       <th>Lap</th>
       <th>Lap time</th>
       <th>Total</th>
@@ -42,12 +30,6 @@
       var green = {color: "green", from: -1000, to: -1};
       var blue = {color: "blue", from: -Infinity, to: -1001};
       var thresholds = [blue, green, orange, red]
-
-
-      function start() {
-        document.getElementById("lapTimesTable").removeAttribute("onclick");
-        document.body.onclick = lap
-      }
 
       function lap() {
         times.push(Date.now())
