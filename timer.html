@@ -25,11 +25,12 @@
       const targetFinishMs =  Number(urlParams.get("targetMinutes") * 60 * 1000) + Number(urlParams.get("targetSeconds") * 1000) + Number(urlParams.get("targetMillies"))
       const lapTarget = Number(urlParams.get("totalLaps"))
 
-      var red = {color: "red", from: 1000, to: Infinity};
-      var orange = {color: "orange", from: 0, to: 999};
-      var green = {color: "green", from: -1000, to: -1};
-      var blue = {color: "blue", from: -Infinity, to: -1001};
-      var thresholds = [blue, green, orange, red]
+      const thresholds = [
+        {color: "blue", from: -Infinity, to: -1001},
+        {color: "green", from: -1000, to: -1},
+        {color: "orange", from: 0, to: 999},
+        {color: "red", from: 1000, to: Infinity},
+      ]
 
       function lap() {
         times.push(Date.now())
@@ -40,12 +41,12 @@
         estimatedFinishTime = totalTime + estimateRemainingTime(lapTime)
 
         setBackground(lapNumber, lapTime, estimatedFinishTime)
+        addToTable(lapNumber, lapTime, totalTime, estimatedFinishTime)
+      }
 
-        row = document.getElementById("lapTimesTable").insertRow(-1)
-        row.insertCell(-1).innerHTML = times.length - 1
-        row.insertCell(-1).innerHTML = msToTime(lapTime)
-        row.insertCell(-1).innerHTML = msToTime(totalTime)
-        row.insertCell(-1).innerHTML = msToTime(estimatedFinishTime)
+      function estimateRemainingTime(lastLap) {
+        lapsLeft = lapTarget - times.length + 1
+        return lapsLeft * lastLap
       }
 
       function setBackground(lapNumber, lapTime, estimatedFinishTime) {
@@ -65,9 +66,12 @@
         }
       }
 
-      function estimateRemainingTime(lastLap) {
-        lapsLeft = lapTarget - times.length + 1
-        return lapsLeft * lastLap
+      function addToTable(lapNumber, lapTime, totalTime, estimatedFinishTime) {
+        row = document.getElementById("lapTimesTable").insertRow(-1)
+        row.insertCell(-1).innerHTML = lapNumber
+        row.insertCell(-1).innerHTML = msToTime(lapTime)
+        row.insertCell(-1).innerHTML = msToTime(totalTime)
+        row.insertCell(-1).innerHTML = msToTime(estimatedFinishTime)
       }
 
       <!-- https://stackoverflow.com/questions/19700283/how-to-convert-time-in-milliseconds-to-hours-min-sec-format-in-javascript -->
