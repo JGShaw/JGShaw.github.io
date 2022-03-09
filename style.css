@@ -14,10 +14,13 @@ td, th {
 }
 
 input {
-  width: 50%;
+  width: 76px;
+  height:38px;
   text-align: center;
 }
 
 button {
+  min-width: 38px;
+  min-height: 38px;
   width: 20%;
 }

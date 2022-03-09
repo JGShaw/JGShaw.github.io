@@ -1,8 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="images/icon192.png">
+    <meta charset="UTF-8">
+    <meta name="description" content="Velodrome lap timer">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#fff">
     <title>Lap timer</title>
   </head>
   <body>
@@ -11,7 +16,7 @@
     <form action="timer.html">
       <table class="setup-table">
         <tr>
-          <td><label>Total Laps:</label></td>
+          <td><label for="totalLaps">Total Laps:</label></td>
           <td>
             <button type="button" onclick="change('totalLaps', -1)">-</button>
             <input type="number" id="totalLaps" name="totalLaps" value="12" pattern="\d*">
@@ -19,7 +24,7 @@
           </td>
         </tr>
         <tr>
-          <td><label>Target first lap:</label> </td>
+          <td><label for="targetFirst">Target first lap:</label> </td>
           <td>
             <button type="button" onclick="change('targetFirst', -1)">-</button>
             <input type="number" id="targetFirst" name="targetFirst" value="23" pattern="\d*">
@@ -35,8 +40,8 @@
           <td colspan="2" style=""><label>Target time</label></td>
         </tr>
         <tr>
-          <td><label>Minutes</label></td>
-          <td><label>Seconds</label></td>
+          <td><label for="targetMinutes">Minutes</label></td>
+          <td><label for="targetSeconds">Seconds</label></td>
         </tr>
         <tr>
           <td>

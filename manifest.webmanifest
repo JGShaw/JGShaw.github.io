@@ -10,6 +10,12 @@
       "src": "/images/icon192.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+    {
+      "src": "/images/maskable_icon.png",
+      "type": "image/png",
+      "sizes": "640x640",
+      "purpose": "any maskable"
     }
   ],
   "start_url": "/index.html",
