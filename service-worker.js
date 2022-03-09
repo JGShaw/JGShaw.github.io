@@ -5,6 +5,7 @@ const appFiles = [
   'style.css',
   'images/icon512.png',
   'images/icon192.png',
+  'images/maskable_icon.png',
 ];
 
 self.addEventListener('install', (e) => {
