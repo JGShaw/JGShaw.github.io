@@ -12,11 +12,19 @@
       <table class="setup-table">
         <tr>
           <td><label>Total Laps:</label></td>
-          <td><input type="number" id="totalLaps" name="totalLaps" value="12"></td>
+          <td>
+            <button type="button" onclick="change('totalLaps', -1)">-</button>
+            <input type="number" id="totalLaps" name="totalLaps" value="12" pattern="\d*">
+            <button type="button" onclick="change('totalLaps', 1)">+</button>
+          </td>
         </tr>
         <tr>
           <td><label>Target first lap:</label> </td>
-          <td><input type="number" id="targetFirst" name="targetFirst" value="23.5"> </td>
+          <td>
+            <button type="button" onclick="change('targetFirst', -1)">-</button>
+            <input type="number" id="targetFirst" name="targetFirst" value="23" pattern="\d*">
+            <button type="button" onclick="change('targetFirst', 1)">+</button>
+          </td>
         </tr>
       </table>
 
@@ -24,23 +32,36 @@
 
       <table class="setup-table">
         <tr>
-          <td calspan="3"><label>Target time</label></td>
+          <td colspan="2" style=""><label>Target time</label></td>
         </tr>
         <tr>
           <td><label>Minutes</label></td>
           <td><label>Seconds</label></td>
-          <td><label>Millies</label></td>
         </tr>
         <tr>
-          <td><input type="number" id="targetMinutes" name="targetMinutes" value="3"></td>
-          <td><input type="number" id="targetSeconds" name="targetSeconds" value="45"></td>
-          <td><input type="number" id="targetMillies" name="targetMillies" value="0"></td>
+          <td>
+            <button type="button" onclick="change('targetMinutes', -1)">-</button>
+            <input type="number" id="targetMinutes" name="targetMinutes" value="3" pattern="\d*">
+            <button type="button" onclick="change('targetMinutes', 1)">+</button>
+          </td>
+          <td>
+            <button type="button" onclick="change('targetSeconds', -1)">+</button>
+            <input type="number" id="targetSeconds" name="targetSeconds" value="45" pattern="\d*">
+            <button type="button" onclick="change('targetSeconds', 1)">+</button>
+          </td>
         </tr>
       </table>
 
       <br />
       <input style="width: 100%;" type="submit" value="Start"/>
     </form>
+
+      <script>
+        function change(id, change) {
+          field = document.getElementById(id)
+          field.value = (Number(field.value) + change)
+        }
+      </script>
 
     <script>
       if ('serviceWorker' in navigator) {

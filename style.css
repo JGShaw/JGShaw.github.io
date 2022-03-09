@@ -12,8 +12,11 @@ td, th {
   text-align: center;
 }
 
-
 input {
   width: 50%;
   text-align: center;
+}
+
+button {
+  width: 20%;
 }

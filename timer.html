@@ -22,7 +22,7 @@
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const targetFirst =  Number(urlParams.get("targetFirst") * 1000)
-      const targetFinishMs =  Number(urlParams.get("targetMinutes") * 60 * 1000) + Number(urlParams.get("targetSeconds") * 1000) + Number(urlParams.get("targetMillies"))
+      const targetFinishMs =  Number(urlParams.get("targetMinutes") * 60 * 1000) + Number(urlParams.get("targetSeconds") * 1000)
       const lapTarget = Number(urlParams.get("totalLaps"))
 
       const thresholds = [
