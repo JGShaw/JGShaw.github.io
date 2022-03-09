@@ -1,12 +1,19 @@
 body {
   overscroll-behavior-y: contain;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-table, th, td {
-  border: 1px solid black;
+.setup-table {
+  width: 100%;
 }
+
 
 td, th {
-  width: 100px;
-  text-align: center
+  text-align: center;
+}
+
+
+input {
+  width: 50%;
+  text-align: center;
 }

@@ -9,7 +9,7 @@
 
     <h1>Persuit setup</h1>
     <form action="timer.html">
-      <table>
+      <table class="setup-table">
         <tr>
           <td><label>Total Laps:</label></td>
           <td><input type="number" id="totalLaps" name="totalLaps" value="12"></td>
@@ -18,21 +18,28 @@
           <td><label>Target first lap:</label> </td>
           <td><input type="number" id="targetFirst" name="targetFirst" value="23.5"> </td>
         </tr>
+      </table>
+
+      <br />
+
+      <table class="setup-table">
         <tr>
-          <td><label>Target minutes:</label> </td>
+          <td calspan="3"><label>Target time</label></td>
+        </tr>
+        <tr>
+          <td><label>Minutes</label></td>
+          <td><label>Seconds</label></td>
+          <td><label>Millies</label></td>
+        </tr>
+        <tr>
           <td><input type="number" id="targetMinutes" name="targetMinutes" value="3"></td>
-        </tr>
-        <tr>
-          <td><label>Target seconds:</label> </td>
           <td><input type="number" id="targetSeconds" name="targetSeconds" value="45"></td>
-        </tr>
-        <tr>
-          <td><label>Target millies:</label> </td>
           <td><input type="number" id="targetMillies" name="targetMillies" value="0"></td>
         </tr>
       </table>
 
-      <input type="submit" value="Start"/>
+      <br />
+      <input style="width: 100%;" type="submit" value="Start"/>
     </form>
 
     <script>
