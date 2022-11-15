@@ -2,10 +2,10 @@ const cacheName = 'lap-timer-v1';
 const appFiles = [
   'src/app.html',
   'src/timer.html',
-  'style.css',
-  'static/icon512.png',
-  'static/icon192.png',
-  'static/maskable_icon.png',
+  '/style.css',
+  '/icon512.png',
+  '/icon192.png',
+  '/maskable_icon.png',
 ];
 
 self.addEventListener('install', (e) => {
