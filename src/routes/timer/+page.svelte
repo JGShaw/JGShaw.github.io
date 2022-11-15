@@ -18,6 +18,7 @@
   ]
 
   var halfLapCount = 0
+  var finished = false
 
   function lap() {
     if (halfLapCount == 0) {
@@ -31,6 +32,7 @@
 
     if ($lapTargets.length < halfLapCount/2 ) {
       setBackgroundColor("white")
+      finished = true
       return
     }
 
@@ -52,6 +54,7 @@
 
       for (const t of thresholds) {
         if(diff >= t.from && diff <= t.to) {
+          finishedLap.color = t.color
           setBackgroundColor(t.color)
           break
         }
@@ -71,7 +74,7 @@
 </script>
 
 <table class="timer-table" on:keypress={ lap } on:click={ lap }>
-  {#if halfLapCount > 0 && $lapTargets.length >= halfLapCount/2}
+  {#if halfLapCount > 0 && !finished}
     <tr>
       <td colspan=5>Timing in progress</td>
     </tr>
@@ -89,11 +92,11 @@
       <td style="width: 20%;">{i + 1}</td>
       <td style="width: 20%;">{ (lap.target / 1000).toFixed(1) }</td>
       {#if i == 0}
-        <td style="width: 20%;">{msToTime(lap.half - lap.start)}</td>
-        <td style="width: 20%;">{msToTime(lap.end - lap.start)}</td>
+        <td style="width: 20%">{msToTime(lap.half - lap.start)}</td>
+        <td style="width: 20%; background:{ lap.color }">{msToTime(lap.end - lap.start)}</td>
       {:else}
         <td style="width: 20%;">{msToTime(lap.half - $lapTargets.at(i-1).end)}</td>
-        <td style="width: 20%;">{msToTime(lap.end - $lapTargets.at(i-1).end)}</td>
+        <td style="width: 20%; background:{ lap.color }">{msToTime(lap.end - $lapTargets.at(i-1).end)}</td>
       {/if}
       <td style="width: 20%;">{msToTime(lap.end - $lapTargets.at(0).start)}</td>
     </tr>
