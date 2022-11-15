@@ -61,9 +61,11 @@
     halfLapCount++
   }
 
-  export function setBackgroundColor(color) {
-    document.body.bgColor = color
-    document.querySelector('meta[name="theme-color"]').setAttribute("content", color)
+  function setBackgroundColor(color) {
+    if (typeof window !== "undefined") {
+      document.body.bgColor = color
+      document.querySelector('meta[name="theme-color"]').setAttribute("content", color)
+    }
   }
 
 </script>
