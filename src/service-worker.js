@@ -1,8 +1,7 @@
 const cacheName = 'lap-timer-v1';
 const appFiles = [
-  'src/app.html',
-  'src/timer.html',
-  '/style.css',
+  '/index.html',
+  '/timer.html',
   '/icon512.png',
   '/icon192.png',
   '/maskable_icon.png',
