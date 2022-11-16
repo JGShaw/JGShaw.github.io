@@ -8,21 +8,11 @@
 
   $: totalTime = $lapTargets.reduce((t, n) => t + parseFloat(n.target), 0)
 
-  function removeLap() {
-    lapTargets.update(l => l.slice(0, -1))
-  }
-
-  function addLap(time) {
-    return function() {
-      lapTargets.update(l => l.concat({target: time}))
-    }
-  }
-
   function resetLaps() {
-    lapTargets.update(l => new Array())
-    addLap(defaultOpeningLap)()
+    lapTargets.reset()
+    lapTargets.addLap(defaultOpeningLap)
     for (let i = 1; i < defaultLaps; i++) {
-      addLap(defaultLap)()
+      lapTargets.addLap(defaultLap)
     }
   }
 
@@ -37,9 +27,9 @@
 <table class="setup-table">
   <tr>
     <td></td>
-    <td><button on:click={ removeLap }>Remove lap</button></td>
+    <td><button on:click={ lapTargets.removeLap }>Remove lap</button></td>
     <td><button on:click={ resetLaps }>Reset</button></td>
-    <td><button on:click={ addLap(defaultLap) }>Add lap</button></td>
+    <td><button on:click={ () => lapTargets.addLap(defaultLap) }>Add lap</button></td>
   </tr>
   {#each $lapTargets as lap, i}
     <tr>

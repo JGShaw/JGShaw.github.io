@@ -22,10 +22,7 @@
 
   function lap() {
     if (halfLapCount == 0) {
-      lapTargets.update(l => {
-        l.at(0).start = Date.now()
-        return l
-      })
+      lapTargets.timeStart()
       halfLapCount++
       return
     }
@@ -37,16 +34,10 @@
     }
 
     if (halfLapCount % 2 == 1) {
-      lapTargets.update(l => {
-        l.at((halfLapCount - 1) / 2).half = Date.now()
-        return l
-      })
+      lapTargets.timeHalf((halfLapCount - 1) / 2)
     } else {
       var lapNumber = (halfLapCount / 2) - 1
-      lapTargets.update(l => {
-        l.at(lapNumber).end = Date.now()
-        return l
-      })
+      lapTargets.timeFull(lapNumber)
 
       var finishedLap = $lapTargets.at(lapNumber)
       var lastLapTime = finishedLap.end - (lapNumber == 0 ? finishedLap.start : $lapTargets.at(lapNumber - 1).end)
