@@ -2,7 +2,7 @@
   import { lapTargets } from "../stores.js" 
   import { msToTime } from "../time.js" 
 
-  const defaultLap = 18300
+  const defaultLap = 18500
   const defaultOpeningLap = 23000
   const defaultLaps = 12
 
