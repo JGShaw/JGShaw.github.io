@@ -11,10 +11,10 @@
   })
 
   const thresholds = [
-    {color: "Blue", from: -Infinity, to: -501},
-    {color: "LawnGreen", from: -500, to: -1},
-    {color: "Orange", from: 0, to: 499},
-    {color: "Red", from: 500, to: Infinity},
+    {color: "Blue", from: -Infinity, to: -301},
+    {color: "LawnGreen", from: -300, to: -1},
+    {color: "Orange", from: 0, to: 299},
+    {color: "Red", from: 300, to: Infinity},
   ]
 
   var halfLapCount = 0
