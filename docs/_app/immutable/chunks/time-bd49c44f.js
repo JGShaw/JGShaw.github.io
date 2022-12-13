@@ -1,1 +1,0 @@
-import{w as a}from"./index-cd438249.js";const i=a(new Array);function l(s){if(Number.isNaN(s))return"";var o=Math.floor(s%1e3),r=Math.floor(s/1e3%60),t=Math.floor(s/(1e3*60)%60),r=r<10&&t!="00"?"0"+r:r,e=r+"."+o.toString().padStart(3,"0");return t=="00"?e:t+":"+e}export{i as l,l as m};
