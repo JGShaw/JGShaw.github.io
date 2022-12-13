@@ -6,7 +6,6 @@ function createLapStore() {
   return {
     subscribe,
     set,
-    update,
     addLap: (time) => update(l => l.concat({target: time})),
     removeLap: () => update(l => l.slice(0, -1)),
     reset: () => set(new Array()),
